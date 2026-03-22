@@ -126,12 +126,7 @@ st.markdown(f"""
 .testimonial{{background:{CARD};border:1px solid {BORDER};border-left:3px solid {GOLD};border-radius:0 14px 14px 0;padding:1.2rem 1.5rem;margin-bottom:1rem;color:{TEXT2};font-size:.9rem;line-height:1.7;font-style:italic;}}
 .testimonial-author{{font-style:normal;font-weight:600;color:{GOLD};font-size:.8rem;margin-top:.5rem;}}
 
-.price-card{{background:{CARD};border:1px solid {BORDER};border-radius:20px;padding:2rem 1.5rem;text-align:center;transition:all .25s;}}
-.price-card.featured{{border-color:{BORDER_G};background:{'linear-gradient(135deg,rgba(201,169,110,0.1),rgba(201,169,110,0.04))' if D else 'linear-gradient(135deg,rgba(201,169,110,0.08),rgba(255,248,238,0.9))'}; box-shadow:0 4px 24px {SHADOW};}}
-.price-card:hover{{transform:translateY(-4px);box-shadow:0 12px 36px {SHADOW};}}
-.price-amount{{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:{TEXT};line-height:1;}}
-.price-period{{font-size:.78rem;color:{TEXT3};}}
-.price-name{{font-size:.9rem;font-weight:600;color:{GOLD};margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em;}}
+
 
 /* Buttons */
 .stButton>button{{background:linear-gradient(135deg,{GOLD},{GOLDL})!important;color:#0c0e14!important;font-weight:600!important;border:none!important;border-radius:10px!important;padding:.45rem 1.4rem!important;font-family:'DM Sans',sans-serif!important;transition:opacity .2s,transform .15s!important;box-shadow:0 2px 12px rgba(201,169,110,.25)!important;}}
@@ -235,21 +230,7 @@ def fig_caspian(df):
     fig.update_layout(mapbox_style=MAPSTYLE,paper_bgcolor=PLOT_BG,coloraxis_showscale=False,margin=dict(l=0,r=0,t=0,b=0),height=360)
     return fig
 
-def fig_funnel():
-    fig = go.Figure(go.Funnel(y=["TAM · $4.2B","SAM · $620M","SOM · $38M","ARR · $820K"],x=[4200,620,38,.82],
-        textinfo="label+percent initial",
-        marker=dict(color=["rgba(201,169,110,.2)","rgba(201,169,110,.4)","rgba(201,169,110,.65)",GOLD],line=dict(width=0)),
-        connector=dict(line=dict(color=BORDER)),hovertemplate="<b>%{label}</b><extra></extra>"))
-    fig.update_layout(**CT,height=270,showlegend=False)
-    return fig
 
-def fig_pie():
-    fig = go.Figure(go.Pie(labels=["Продукт & AI","Маркетинг","Команда","Операции"],values=[40,30,20,10],hole=.62,
-        marker=dict(colors=[GOLD,BLUE,GREEN,"#d4907e"],line=dict(color=BG,width=2)),textinfo="none",
-        hovertemplate="<b>%{label}</b><br>%{value}%<extra></extra>"))
-    fig.add_annotation(text="$1.5M",x=.5,y=.5,font=dict(size=20,color=TEXT,family="Cormorant Garamond"),showarrow=False)
-    fig.update_layout(**CT,height=250,showlegend=True,legend=dict(font=dict(color=TEXT3,size=10),bgcolor="rgba(0,0,0,0)"))
-    return fig
 
 # ─── AI ───────────────────────────────────────────────────────────────────────
 SYS = """Ты — помощник платформы EurasianKnowledge. Эксперт по экономике Евразии и Каспийскому региону.
@@ -302,7 +283,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown(f'<div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:{TEXT3};margin-bottom:.4rem;">Разделы</div>', unsafe_allow_html=True)
-    section = st.radio("nav", ["🏠 Главная","📊 Аналитика","🗺️ GIS Каспий","📚 Библиотека","🤖 AI Ассистент","💼 Инвесторам"],
+    section = st.radio("nav", ["🏠 Главная","📊 Аналитика","🗺️ GIS Каспий","📚 Библиотека","🤖 AI Ассистент"],
         label_visibility="collapsed")
 
     st.markdown("---")
@@ -318,7 +299,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.selectbox("Язык", ["🇷🇺 RU","🇰🇿 KZ","🇬🇧 EN"], label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:.65rem;color:{TEXT3};margin-top:1.5rem;line-height:1.6;">© 2025 EurasianKnowledge<br>Seed Round · Закрытие 31 мар</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:.65rem;color:{TEXT3};margin-top:1.5rem;line-height:1.6;">© 2025 EurasianKnowledge<br>Цифровая платформа знаний</div>', unsafe_allow_html=True)
 
 # ─── Load data ────────────────────────────────────────────────────────────────
 df = get_df(); geo_df = get_geo(); cas_df = get_caspian()
@@ -328,7 +309,7 @@ if section == "🏠 Главная":
 # ══════════════════════════════════════════════════════════════════════════════
     st.markdown(f"""
     <div class="hero-wrap">
-        <span class="ek-tag" style="margin-bottom:1rem;display:inline-block;">🚀 Seed Round · Q1 2025</span>
+        <span class="ek-tag" style="margin-bottom:1rem;display:inline-block;">🌐 Евразийская платформа знаний</span>
         <div class="hero-title">Знания Евразии —<br><span class="hero-gold">в одном месте</span></div>
         <div class="hero-sub">Исследуйте экономику Каспийского региона, читайте книги на казахском и русском,
         задавайте вопросы AI-ассистенту. Для студентов, предпринимателей и исследователей.</div>
@@ -360,18 +341,7 @@ if section == "🏠 Главная":
             items_html = "".join(f'<li style="font-size:.82rem;color:{TEXT2};margin-bottom:6px;list-style:none;">✓ {it}</li>' for it in items)
             st.markdown(f'<div class="ek-card"><div style="font-size:2rem;margin-bottom:.5rem;">{emoji}</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:1.2rem;font-weight:700;color:{TEXT};margin-bottom:.8rem;">{title}</div><ul style="padding:0;margin:0;">{items_html}</ul></div>', unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.markdown(f'<div class="section-header">Тарифы</div><div class="section-sub">Начните бесплатно, расширяйте по мере роста</div>', unsafe_allow_html=True)
-    p1,p2,p3 = st.columns(3)
-    for col,name,price,featured,perks in [
-        (p1,"Старт","0",False,["10 AI-запросов/день","3 книги","Базовая аналитика","—"]),
-        (p2,"Про","990",True,["Безлимит AI","Все 5 книг + аудио","Полная аналитика","GIS-доступ"]),
-        (p3,"Команда","3 900",False,["До 10 пользователей","API-доступ","Выгрузка данных","Поддержка 24/7"]),
-    ]:
-        with col:
-            perks_html = "".join(f'<div style="font-size:.8rem;color:{TEXT2 if p!="—" else TEXT3};padding:5px 0;border-bottom:1px solid {BORDER};">{"✓" if p!="—" else "—"} {p}</div>' for p in perks)
-            st.markdown(f'<div class="price-card {"featured" if featured else ""}"><div class="price-name">{name}</div><div class="price-amount">₸{price}</div><div class="price-period">/ мес</div><div style="margin:1.2rem 0;">{perks_html}</div></div>', unsafe_allow_html=True)
-            st.button(f"Выбрать {name}", key=f"plan_{name}", use_container_width=True)
+
 
     st.markdown("---")
     st.markdown(f'<div class="section-header">Отзывы пользователей</div>', unsafe_allow_html=True)
@@ -388,32 +358,23 @@ elif section == "📊 Аналитика":
 # ══════════════════════════════════════════════════════════════════════════════
     st.markdown(f'<div class="section-header">Аналитический дашборд</div><div class="section-sub">Рынки СНГ · Китай · Нефть · Торговля</div>', unsafe_allow_html=True)
     k1,k2,k3,k4 = st.columns(4)
-    with k1: st.metric("ARR","$820K","+34% MRR")
-    with k2: st.metric("MAU","38 K","+127% г/г")
-    with k3: st.metric("LTV/CAC","4.7×","↑ растёт")
-    with k4: st.metric("Churn","2.1%","↓ снижается")
+    with k1: st.metric("Активных читателей","38 K","+127% за год")
+    with k2: st.metric("Книг в библиотеке","5","+2 в разработке")
+    with k3: st.metric("Статей & отчётов","38","Новые каждый месяц")
+    with k4: st.metric("Языков","3","KZ · RU · EN")
     st.markdown("---")
     tab1,tab2,tab3 = st.tabs(["💰 Выручка","👥 Пользователи","📚 Книги"])
     with tab1:
         ca,cb = st.columns([3,1])
         with ca: st.plotly_chart(fig_revenue(df),use_container_width=True,config={"displayModeBar":False})
         with cb:
-            for lbl,val in [("MRR рост","+34%"),("Gross Margin","72%"),("NPS","71"),("Retention M1","64%")]:
+            for lbl,val in [("Стран охвата","12"),("Ср. сессия","8.4 мин"),("Повторных визитов","64%"),("Рейтинг","4.8 ★")]:
                 st.markdown(f'<div class="kpi-block" style="padding:.8rem;text-align:left;margin-bottom:.5rem;"><div class="kpi-label">{lbl}</div><div class="kpi-value" style="font-size:1.4rem;color:{GOLD};">{val}</div></div>', unsafe_allow_html=True)
     with tab2: st.plotly_chart(fig_users(df),use_container_width=True,config={"displayModeBar":False})
     with tab3: st.plotly_chart(fig_books(df),use_container_width=True,config={"displayModeBar":False})
     st.markdown("---")
-    cm,cp = st.columns([3,2])
-    with cm:
-        st.markdown(f'<div class="section-header" style="font-size:1.1rem;">🌍 География</div>', unsafe_allow_html=True)
-        st.plotly_chart(fig_geo(geo_df),use_container_width=True,config={"displayModeBar":False})
-    with cp:
-        st.markdown(f'<div class="section-header" style="font-size:1.1rem;">💼 Use of Funds</div>', unsafe_allow_html=True)
-        st.plotly_chart(fig_pie(),use_container_width=True,config={"displayModeBar":False})
-        for item,pct in [("Продукт & AI",40),("Маркетинг",30),("Команда",20),("Операции",10)]:
-            cc,cv = st.columns([4,1])
-            with cc: st.progress(pct/100)
-            with cv: st.markdown(f'<div style="color:{GOLD};font-size:.75rem;font-weight:600;margin-top:3px;">{pct}%</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-header" style="font-size:1.1rem;">🌍 География аудитории</div>', unsafe_allow_html=True)
+    st.plotly_chart(fig_geo(geo_df),use_container_width=True,config={"displayModeBar":False})
 
 # ══════════════════════════════════════════════════════════════════════════════
 elif section == "🗺️ GIS Каспий":
@@ -533,43 +494,3 @@ elif section == "🤖 AI Ассистент":
     if st.session_state.chat_history:
         if st.button("🗑️ Очистить историю"):
             st.session_state.chat_history=[]; st.rerun()
-
-# ══════════════════════════════════════════════════════════════════════════════
-elif section == "💼 Инвесторам":
-# ══════════════════════════════════════════════════════════════════════════════
-    st.markdown(f'<span class="ek-tag">💼 Investor Relations · Seed</span>', unsafe_allow_html=True)
-    st.markdown(f'<div class="section-header">Инвестиционный кейс</div><div class="section-sub">Seed Round · $1.5M · Закрытие 31 марта 2025</div>', unsafe_allow_html=True)
-    st.progress(0.6)
-    p1,p2,p3 = st.columns(3)
-    for col,txt in [(p1,"$900K собрано"),(p2,"3 инвестора подтверждены"),(p3,"9 дней до закрытия")]:
-        with col: st.markdown(f'<div style="text-align:center;font-size:.82rem;color:{TEXT2};">{txt}</div>',unsafe_allow_html=True)
-    st.markdown("---")
-    cf,ca = st.columns([3,2])
-    with cf:
-        st.markdown(f'<div class="section-header" style="font-size:1.1rem;">📐 Рыночная возможность</div>', unsafe_allow_html=True)
-        st.plotly_chart(fig_funnel(),use_container_width=True,config={"displayModeBar":False})
-    with ca:
-        st.markdown(f'<div class="section-header" style="font-size:1.1rem;">🏆 Преимущества</div>', unsafe_allow_html=True)
-        for icon,text in [("🌐","Единственная мультиязычная B2B+B2C платформа в регионе"),("🤖","AI-ассистент на авторском контенте"),("🗺️","Эксклюзивная GIS-база Каспия"),("📚","5 книг + 38 статей как IP-актив"),("💰","3 revenue streams: SaaS, книги, API")]:
-            st.markdown(f'<div class="ek-card" style="padding:.8rem 1rem;margin-bottom:.4rem;">{icon} <span style="font-size:.85rem;color:{TEXT2};">{text}</span></div>',unsafe_allow_html=True)
-    st.markdown("---")
-    t1,t2,t3,t4,t5 = st.columns(5)
-    for col,lbl,val,delta in zip([t1,t2,t3,t4,t5],["ARR","MAU","NPS","Retention M1","Книг продано"],["$820K","38 K","71","64%","842"],["+34%","+127%","↑","↑","+89%"]):
-        with col: st.metric(lbl,val,delta)
-    st.markdown("---")
-    st.markdown(f'<div class="section-header" style="font-size:1.1rem;">🤖 AI-питч под тип инвестора</div>', unsafe_allow_html=True)
-    inv_type = st.selectbox("Тип инвестора",["Венчурный фонд (ЦА/СНГ)","Стратегический инвестор (EdTech)","Семейный офис","Государственный фонд Казахстана","Международный фонд (США/Европа)"])
-    if st.button("✨ Сгенерировать питч"):
-        if not st.session_state.client:
-            st.warning(f"🔑 [Получить API Key →](https://console.anthropic.com/settings/keys)")
-        else:
-            with st.spinner("Генерирую питч..."):
-                try:
-                    full, used = call_ai(st.session_state.client, [{"role":"user","content":f"Напиши инвестиционный питч (300 слов) для EurasianKnowledge под: {inv_type}. ARR $820K, MAU 38K, Seed $1.5M, TAM $4.2B."}])
-                    st.markdown(f'<div class="chat-ai">{full}</div>', unsafe_allow_html=True)
-                    st.download_button("⬇️ Скачать питч", data=full, file_name=f"pitch_{inv_type}.txt", mime="text/plain")
-                    st.caption(f"Модель: {used}")
-                except Exception as e:
-                    st.error(f"Ошибка AI: {e}")
-    st.markdown("---")
-    st.markdown(f'<div class="ek-card" style="text-align:center;padding:2.5rem;border-color:{BORDER_G};background:{"linear-gradient(135deg,rgba(201,169,110,0.08),transparent)" if D else "linear-gradient(135deg,rgba(201,169,110,0.06),rgba(255,248,238,0.9))"}"><div style="font-family:\'Cormorant Garamond\',serif;font-size:2rem;font-weight:700;color:{TEXT};margin-bottom:.5rem;">Присоединитесь к раунду</div><div style="color:{TEXT3};font-size:.9rem;margin-bottom:.3rem;">Минимальный чек $50K · 9 дней до закрытия</div><div style="color:{GOLD};font-size:.85rem;">founder@eurasianknowledge.kz</div></div>', unsafe_allow_html=True)
