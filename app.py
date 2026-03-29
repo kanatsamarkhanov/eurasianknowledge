@@ -2,7 +2,6 @@
 Kulekeyev Intelligence Hub
 Цифровая интеллектуальная платформа Жаксыбека Абдрахметовича Кулекеева
 Streamlit · Light/Dark · Anthropic AI
-Концепция: Гульбазар Акыловна Медиева
 """
 
 import streamlit as st
@@ -406,7 +405,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.selectbox("Язык", ["🇷🇺 RU", "🇰🇿 KZ", "🇬🇧 EN"], label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:.62rem;color:{TEXT3};margin-top:1.4rem;line-height:1.65;">© 2025 Kulekeyev Intelligence Hub<br>Концепция: Г.А. Медиева</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:.62rem;color:{TEXT3};margin-top:1.4rem;line-height:1.65;">© 2025 Kulekeyev Intelligence Hub<br></div>', unsafe_allow_html=True)
 
 # ─── Data load ────────────────────────────────────────────────────────────────
 df      = get_df()
